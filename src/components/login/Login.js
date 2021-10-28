@@ -30,13 +30,13 @@ const styles = {
 };
 
 const Login = () => {
-  useEffect(() => {
-    console.log("user data requestedd");
-    axios
-      .get("http://localhost:5000/getData")
-      .then((data) => console.log(data))
-      .catch((e) => console.log(e));
-  });
+  // useEffect(() => {
+  //   console.log("user data requestedd");
+  //   axios
+  //     .get("http://localhost:5000/getData")
+  //     .then((data) => console.log(data))
+  //     .catch((e) => console.log(e));
+  // });
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [male, setMale] = useState("");
@@ -67,16 +67,19 @@ const Login = () => {
       setGender("male");
     }
     console.log("submitted");
-    setFormData({
-      name: name,
-      number: number,
-      gender: gender,
-      city: city,
-      passWord: passWord,
-      confirmPassWord: confirmPassWord,
-      profilePic: profilePic,
-    });
-    axios.post("http://localhost:5000/userData", formData);
+    console.log(passWord === confirmPassWord);
+    if (passWord === confirmPassWord) {
+      setFormData({
+        name: name,
+        number: number,
+        gender: gender,
+        city: city,
+        passWord: passWord,
+        confirmPassWord: confirmPassWord,
+        profilePic: profilePic,
+      });
+      axios.post("http://localhost:5000/userData", formData);
+    }
   };
   const handleNameChange = (e) => {
     setName(e.target.value);
